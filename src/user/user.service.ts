@@ -12,7 +12,7 @@ export class UserService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
-    const user = this.userRepo.create(createUserDto);
+    const user = this.userRepo.create(createUserDto); // create from the owner side
     return this.userRepo.save(user);
   }
 
