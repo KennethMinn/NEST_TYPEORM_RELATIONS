@@ -9,6 +9,6 @@ export class Profile {
   @Column()
   bio: string;
 
-  @OneToOne(() => User, (user) => user.profile)
+  @OneToOne(() => User, (user) => user.profile, { onDelete: 'SET NULL' })
   user: User;
 }

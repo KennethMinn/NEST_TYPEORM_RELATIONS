@@ -1,13 +1,12 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Profile } from 'src/profile/entities/profile.entity';
-import { ProfileModule } from 'src/profile/profile.module';
+import { PostModule } from 'src/post/post.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Profile]), ProfileModule],
+  imports: [TypeOrmModule.forFeature([User]), forwardRef(() => PostModule)], // post and user depends on each others services
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService],

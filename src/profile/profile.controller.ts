@@ -1,8 +1,6 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { CreateProfileDto } from './dto/create-profile.dto';
-import { Serialize } from 'src/common/interceptors/serialize.interceptor';
-import { ProfileDto } from './dto/profile.dto';
 
 @Controller('profiles')
 export class ProfileController {
@@ -13,9 +11,13 @@ export class ProfileController {
     return this.profileService.create(createProfileDto);
   }
 
-  @Serialize(ProfileDto)
   @Get()
   findAll() {
     return this.profileService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.profileService.findOne(+id);
   }
 }
