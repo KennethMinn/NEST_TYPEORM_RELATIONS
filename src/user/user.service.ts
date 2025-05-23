@@ -16,7 +16,7 @@ export class UserService {
   constructor(
     @InjectRepository(User) private readonly repo: Repository<User>,
     @Inject(forwardRef(() => PostService))
-    private readonly postService: PostService, // post and user depends on each others services
+    private readonly postService: PostService, // post and user depends on each other services
   ) {}
 
   create(createUserDto: CreateUserDto) {
@@ -48,7 +48,6 @@ export class UserService {
   }
 
   async likePost(likePostDto: LikePostDto) {
-    console.log(likePostDto);
     const user = await this.findOne(likePostDto.userId);
     const post = await this.postService.findOne(likePostDto.postId);
 
